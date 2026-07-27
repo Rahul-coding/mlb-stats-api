@@ -61,13 +61,14 @@ class mlb_stats_client:
             return self.get_team_id(team_identifier)
         return team_identifier
 
-    def get_pitcher_stats(self, player: Union[str, int], fields: list[str] = None, stat_type: str = "season") -> dict:
+    def get_pitcher_stats(self, player: Union[str, int], fields: list[str] = None, stat_type: str = "season", season: int = 2026) -> dict:
         """Fetch current season pitching stats by player name or MLB ID.
 
         Args:
             player: The player's name or MLB ID.
             fields: Specific stat fields to return. Defaults to None (return all).
             stat_type: Type of stats to fetch (e.g., "season", "career"). Defaults to "season".
+            season: The season year for which to fetch stats. Defaults to 2026.
 
         Returns:
             A dictionary containing the requested pitching stats.
@@ -76,7 +77,7 @@ class mlb_stats_client:
             ValueError: If no player is found with the given name.
         """
         person_id = self.convert_to_id(player)
-        endpoint = f"{self.BASE_URL}/people/{person_id}?hydrate=stats(group=[pitching],type=[{stat_type}])"
+        endpoint = f"{self.BASE_URL}/people/{person_id}?hydrate=stats(group=[pitching],type=[{stat_type}],season={season})"
         
         response = requests.get(endpoint)
         response.raise_for_status()
@@ -91,7 +92,7 @@ class mlb_stats_client:
             print(f"No pitching stats found for player: '{player}'")
             return {}
 
-    def get_hitter_stats(self, player: Union[str, int], fields: list[str] = None, stat_type: str = "season") -> dict:
+    def get_hitter_stats(self, player: Union[str, int], fields: list[str] = None, stat_type: str = "season", season: int = 2026) -> dict:
         """Fetch current season hitting stats by player name or MLB ID.
 
         Args:
@@ -104,9 +105,10 @@ class mlb_stats_client:
 
         Raises:
             ValueError: If no player is found with the given name.
+            season: The season year for which to fetch stats. Defaults to 2026.
         """
         person_id = self.convert_to_id(player)
-        endpoint = f"{self.BASE_URL}/people/{person_id}?hydrate=stats(group=[hitting],type=[{stat_type}])"
+        endpoint = endpoint = f"{self.BASE_URL}/people/{person_id}?hydrate=stats(group=[hitting],type=[{stat_type}],season={season})"
         
         response = requests.get(endpoint)
         response.raise_for_status()
@@ -189,3 +191,37 @@ class mlb_stats_client:
                 continue
                 
         return all_group_stats
+    def get_stat_leaders(self, stat: str, group: str = "hitting", season: int = 2026, num_leaders: int = 10, league: str = "") -> list[dict]:
+        """Fetch the top players in a specific stat category for the current season.
+
+        Args:
+            stat: The stat category to fetch leaders for (e.g., "homeRuns", "strikeOuts").
+            group: The stat group to fetch from ("hitting" or "pitching"). Defaults to "hitting".
+            season: The season year for which to fetch leaders. Defaults to 2026.
+            num_leaders: The maximum number of leaders to return. Defaults to 10.
+            league: The league for which to fetch leaders. Defaults to "" (all leagues).
+
+        Returns:
+            A list of dictionaries containing the top players and their stats in the specified category.
+        """
+        endpoint = f"{self.BASE_URL}/stats/leaders"
+        params = {
+            "statGroup": group,
+            "statType": "season",
+            "season": season,
+            "limit": num_leaders,
+            "leaderCategories": stat
+        }
+        
+        response = requests.get(endpoint, params=params)
+        response.raise_for_status()
+        
+        data = response.json()
+        try:
+            leaders = data["leagueLeaders"][0]["leaders"]
+            if(league):
+                leaders = [leader for leader in leaders if leader.get("league", {}).get("name", "").lower() == league.lower()]
+            return leaders
+        except (IndexError, KeyError):
+            print(f"No leaders found for stat: '{stat}' in group: '{group}' for season: {season}")
+            return []
