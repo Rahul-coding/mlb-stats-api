@@ -1,0 +1,1886 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>API Reference - MLB Stats Client</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../assets/_mkdocstrings.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "API Reference";
+        var mkdocs_page_input_path = "api-refernce.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> MLB Stats Client
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">API Reference</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#mlb_stats.client.mlb_stats_client">mlb_stats_client</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#mlb_stats.client.mlb_stats_client.convert_team_to_id">convert_team_to_id</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#mlb_stats.client.mlb_stats_client.convert_to_id">convert_to_id</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#mlb_stats.client.mlb_stats_client.get_hitter_stats">get_hitter_stats</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#mlb_stats.client.mlb_stats_client.get_pitcher_stats">get_pitcher_stats</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#mlb_stats.client.mlb_stats_client.get_player_id">get_player_id</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#mlb_stats.client.mlb_stats_client.get_stat_leaders">get_stat_leaders</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#mlb_stats.client.mlb_stats_client.get_team_id">get_team_id</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#mlb_stats.client.mlb_stats_client.get_team_stats">get_team_stats</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">MLB Stats Client</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">API Reference</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="api-reference">API Reference</h1>
+<p>Here is the complete API reference for the <code>mlb_stats_client</code>, automatically generated from the source code.</p>
+
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="mlb_stats.client.mlb_stats_client" class="doc doc-heading">
+            <code>mlb_stats.client.mlb_stats_client</code>
+
+
+</h2>
+
+
+    <div class="doc doc-contents first">
+
+
+
+
+
+
+
+
+
+              <details class="quote">
+                <summary>Source code in <code>mlb_stats/client.py</code></summary>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">  5</span>
+<span class="normal">  6</span>
+<span class="normal">  7</span>
+<span class="normal">  8</span>
+<span class="normal">  9</span>
+<span class="normal"> 10</span>
+<span class="normal"> 11</span>
+<span class="normal"> 12</span>
+<span class="normal"> 13</span>
+<span class="normal"> 14</span>
+<span class="normal"> 15</span>
+<span class="normal"> 16</span>
+<span class="normal"> 17</span>
+<span class="normal"> 18</span>
+<span class="normal"> 19</span>
+<span class="normal"> 20</span>
+<span class="normal"> 21</span>
+<span class="normal"> 22</span>
+<span class="normal"> 23</span>
+<span class="normal"> 24</span>
+<span class="normal"> 25</span>
+<span class="normal"> 26</span>
+<span class="normal"> 27</span>
+<span class="normal"> 28</span>
+<span class="normal"> 29</span>
+<span class="normal"> 30</span>
+<span class="normal"> 31</span>
+<span class="normal"> 32</span>
+<span class="normal"> 33</span>
+<span class="normal"> 34</span>
+<span class="normal"> 35</span>
+<span class="normal"> 36</span>
+<span class="normal"> 37</span>
+<span class="normal"> 38</span>
+<span class="normal"> 39</span>
+<span class="normal"> 40</span>
+<span class="normal"> 41</span>
+<span class="normal"> 42</span>
+<span class="normal"> 43</span>
+<span class="normal"> 44</span>
+<span class="normal"> 45</span>
+<span class="normal"> 46</span>
+<span class="normal"> 47</span>
+<span class="normal"> 48</span>
+<span class="normal"> 49</span>
+<span class="normal"> 50</span>
+<span class="normal"> 51</span>
+<span class="normal"> 52</span>
+<span class="normal"> 53</span>
+<span class="normal"> 54</span>
+<span class="normal"> 55</span>
+<span class="normal"> 56</span>
+<span class="normal"> 57</span>
+<span class="normal"> 58</span>
+<span class="normal"> 59</span>
+<span class="normal"> 60</span>
+<span class="normal"> 61</span>
+<span class="normal"> 62</span>
+<span class="normal"> 63</span>
+<span class="normal"> 64</span>
+<span class="normal"> 65</span>
+<span class="normal"> 66</span>
+<span class="normal"> 67</span>
+<span class="normal"> 68</span>
+<span class="normal"> 69</span>
+<span class="normal"> 70</span>
+<span class="normal"> 71</span>
+<span class="normal"> 72</span>
+<span class="normal"> 73</span>
+<span class="normal"> 74</span>
+<span class="normal"> 75</span>
+<span class="normal"> 76</span>
+<span class="normal"> 77</span>
+<span class="normal"> 78</span>
+<span class="normal"> 79</span>
+<span class="normal"> 80</span>
+<span class="normal"> 81</span>
+<span class="normal"> 82</span>
+<span class="normal"> 83</span>
+<span class="normal"> 84</span>
+<span class="normal"> 85</span>
+<span class="normal"> 86</span>
+<span class="normal"> 87</span>
+<span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span>
+<span class="normal">171</span>
+<span class="normal">172</span>
+<span class="normal">173</span>
+<span class="normal">174</span>
+<span class="normal">175</span>
+<span class="normal">176</span>
+<span class="normal">177</span>
+<span class="normal">178</span>
+<span class="normal">179</span>
+<span class="normal">180</span>
+<span class="normal">181</span>
+<span class="normal">182</span>
+<span class="normal">183</span>
+<span class="normal">184</span>
+<span class="normal">185</span>
+<span class="normal">186</span>
+<span class="normal">187</span>
+<span class="normal">188</span>
+<span class="normal">189</span>
+<span class="normal">190</span>
+<span class="normal">191</span>
+<span class="normal">192</span>
+<span class="normal">193</span>
+<span class="normal">194</span>
+<span class="normal">195</span>
+<span class="normal">196</span>
+<span class="normal">197</span>
+<span class="normal">198</span>
+<span class="normal">199</span>
+<span class="normal">200</span>
+<span class="normal">201</span>
+<span class="normal">202</span>
+<span class="normal">203</span>
+<span class="normal">204</span>
+<span class="normal">205</span>
+<span class="normal">206</span>
+<span class="normal">207</span>
+<span class="normal">208</span>
+<span class="normal">209</span>
+<span class="normal">210</span>
+<span class="normal">211</span>
+<span class="normal">212</span>
+<span class="normal">213</span>
+<span class="normal">214</span>
+<span class="normal">215</span>
+<span class="normal">216</span>
+<span class="normal">217</span>
+<span class="normal">218</span>
+<span class="normal">219</span>
+<span class="normal">220</span>
+<span class="normal">221</span>
+<span class="normal">222</span>
+<span class="normal">223</span>
+<span class="normal">224</span>
+<span class="normal">225</span>
+<span class="normal">226</span>
+<span class="normal">227</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">mlb_stats_client</span><span class="p">:</span>
+    <span class="n">BASE_URL</span> <span class="o">=</span> <span class="s2">&quot;https://statsapi.mlb.com/api/v1&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_player_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Search for a player by full name and return their MLB person_id.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            name: The full name of the player to search for.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            The MLB person_id of the player.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            ValueError: If no player is found with the given name.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">endpoint</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">BASE_URL</span><span class="si">}</span><span class="s2">/people/search?names=</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">endpoint</span><span class="p">)</span>
+        <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+
+        <span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+        <span class="n">people</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;people&quot;</span><span class="p">,</span> <span class="p">[])</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">people</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;No player found matching name: &#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">people</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;id&quot;</span><span class="p">]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">convert_to_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">player_identifier</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Helper to ensure we have an integer ID, looking up names if needed.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            player_identifier: The player&#39;s name or ID.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            The MLB person_id of the player.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            ValueError: If no player is found with the given name.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">player_identifier</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_player_id</span><span class="p">(</span><span class="n">player_identifier</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">player_identifier</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">convert_team_to_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">team_identifier</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Helper to ensure we have an integer team ID.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            team_identifier: The team&#39;s name or ID.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            The MLB team_id of the team.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            ValueError: If no team is found with the given name.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">team_identifier</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_team_id</span><span class="p">(</span><span class="n">team_identifier</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">team_identifier</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_pitcher_stats</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">player</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span> <span class="n">fields</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">stat_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;season&quot;</span><span class="p">,</span> <span class="n">season</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2026</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Fetch current season pitching stats by player name or MLB ID.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            player: The player&#39;s name or MLB ID.</span>
+<span class="sd">            fields: Specific stat fields to return. Defaults to None (return all).</span>
+<span class="sd">            stat_type: Type of stats to fetch (e.g., &quot;season&quot;, &quot;career&quot;). Defaults to &quot;season&quot;.</span>
+<span class="sd">            season: The season year for which to fetch stats. Defaults to 2026.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A dictionary containing the requested pitching stats.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            ValueError: If no player is found with the given name.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">person_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert_to_id</span><span class="p">(</span><span class="n">player</span><span class="p">)</span>
+        <span class="n">endpoint</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">BASE_URL</span><span class="si">}</span><span class="s2">/people/</span><span class="si">{</span><span class="n">person_id</span><span class="si">}</span><span class="s2">?hydrate=stats(group=[pitching],type=[</span><span class="si">{</span><span class="n">stat_type</span><span class="si">}</span><span class="s2">],season=</span><span class="si">{</span><span class="n">season</span><span class="si">}</span><span class="s2">)&quot;</span>
+
+        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">endpoint</span><span class="p">)</span>
+        <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+
+        <span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">stats</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;people&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;stats&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;splits&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;stat&quot;</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">fields</span><span class="p">:</span>
+                <span class="n">stats</span> <span class="o">=</span> <span class="p">{</span><span class="n">field</span><span class="p">:</span> <span class="n">stats</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">field</span><span class="p">)</span> <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">fields</span><span class="p">}</span>
+            <span class="k">return</span> <span class="n">stats</span>
+        <span class="k">except</span> <span class="p">(</span><span class="ne">IndexError</span><span class="p">,</span> <span class="ne">KeyError</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;No pitching stats found for player: &#39;</span><span class="si">{</span><span class="n">player</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="p">{}</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_hitter_stats</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">player</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span> <span class="n">fields</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">stat_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;season&quot;</span><span class="p">,</span> <span class="n">season</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2026</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Fetch current season hitting stats by player name or MLB ID.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            player: The player&#39;s name or MLB ID.</span>
+<span class="sd">            fields: Specific stat fields to return. Defaults to None (return all).</span>
+<span class="sd">            stat_type: Type of stats to fetch (e.g., &quot;season&quot;, &quot;career&quot;). Defaults to &quot;season&quot;.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A dictionary containing the requested hitting stats.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            ValueError: If no player is found with the given name.</span>
+<span class="sd">            season: The season year for which to fetch stats. Defaults to 2026.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">person_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert_to_id</span><span class="p">(</span><span class="n">player</span><span class="p">)</span>
+        <span class="n">endpoint</span> <span class="o">=</span> <span class="n">endpoint</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">BASE_URL</span><span class="si">}</span><span class="s2">/people/</span><span class="si">{</span><span class="n">person_id</span><span class="si">}</span><span class="s2">?hydrate=stats(group=[hitting],type=[</span><span class="si">{</span><span class="n">stat_type</span><span class="si">}</span><span class="s2">],season=</span><span class="si">{</span><span class="n">season</span><span class="si">}</span><span class="s2">)&quot;</span>
+
+        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">endpoint</span><span class="p">)</span>
+        <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+
+        <span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">stats</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;people&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;stats&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;splits&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;stat&quot;</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">fields</span><span class="p">:</span>
+                <span class="n">stats</span> <span class="o">=</span> <span class="p">{</span><span class="n">field</span><span class="p">:</span> <span class="n">stats</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">field</span><span class="p">)</span> <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">fields</span><span class="p">}</span>
+            <span class="k">return</span> <span class="n">stats</span>
+        <span class="k">except</span> <span class="p">(</span><span class="ne">IndexError</span><span class="p">,</span> <span class="ne">KeyError</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;No hitting stats found for player: &#39;</span><span class="si">{</span><span class="n">player</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="p">{}</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_team_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Search for a team by name (e.g., &#39;Yankees&#39; or &#39;New York Yankees&#39;) and return its team_id.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            name: The name of the team to search for.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            The MLB team_id of the team.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            ValueError: If no team is found with the given name.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">endpoint</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">BASE_URL</span><span class="si">}</span><span class="s2">/teams?sportId=1&quot;</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">endpoint</span><span class="p">)</span>
+        <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+
+        <span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+        <span class="n">teams</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;teams&quot;</span><span class="p">,</span> <span class="p">[])</span>
+        <span class="n">name_lower</span> <span class="o">=</span> <span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">team</span> <span class="ow">in</span> <span class="n">teams</span><span class="p">:</span>
+            <span class="n">team</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;springLeague&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">name_lower</span> <span class="o">==</span> <span class="n">team</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;clubName&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">or</span> 
+                <span class="n">name_lower</span> <span class="o">==</span> <span class="n">team</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">or</span>
+                <span class="n">name_lower</span> <span class="o">==</span> <span class="n">team</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;abbreviation&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()):</span>
+                <span class="k">return</span> <span class="n">team</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span>
+
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;No team found matching name: &#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_team_stats</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">team</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span> <span class="n">fields</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">group</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;hitting&quot;</span><span class="p">,</span> <span class="s2">&quot;pitching&quot;</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Fetch current season team stats by team name or ID using the dedicated /teams/stats endpoint.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            team: The team&#39;s name or MLB ID.</span>
+<span class="sd">            fields: Specific stat fields to return. Defaults to None (return all).</span>
+<span class="sd">            group: List of stat groups to fetch (e.g., [&quot;hitting&quot;, &quot;pitching&quot;]). Defaults to both.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A dictionary containing the requested team stats, organized by group type.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            ValueError: If no team is found with the given name.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">team_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert_team_to_id</span><span class="p">(</span><span class="n">team</span><span class="p">)</span>
+        <span class="n">all_group_stats</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="k">for</span> <span class="n">group_type</span> <span class="ow">in</span> <span class="n">group</span><span class="p">:</span>
+            <span class="n">endpoint</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">BASE_URL</span><span class="si">}</span><span class="s2">/teams/</span><span class="si">{</span><span class="n">team_id</span><span class="si">}</span><span class="s2">/stats&quot;</span>
+            <span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">&quot;teamId&quot;</span><span class="p">:</span> <span class="n">team_id</span><span class="p">,</span>
+                <span class="s2">&quot;stats&quot;</span><span class="p">:</span> <span class="s2">&quot;season&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;group&quot;</span><span class="p">:</span> <span class="n">group_type</span><span class="p">,</span> 
+                <span class="s2">&quot;season&quot;</span><span class="p">:</span> <span class="mi">2026</span>      
+            <span class="p">}</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">endpoint</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
+            <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+
+            <span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">stats</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;stats&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;splits&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;stat&quot;</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">fields</span><span class="p">:</span>
+                    <span class="n">stats</span> <span class="o">=</span> <span class="p">{</span><span class="n">field</span><span class="p">:</span> <span class="n">stats</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">field</span><span class="p">)</span> <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">fields</span> <span class="k">if</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">stats</span><span class="p">}</span>
+                <span class="n">all_group_stats</span><span class="p">[</span><span class="n">group_type</span><span class="p">]</span> <span class="o">=</span> <span class="n">stats</span>
+            <span class="k">except</span> <span class="p">(</span><span class="ne">IndexError</span><span class="p">,</span> <span class="ne">KeyError</span><span class="p">):</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;No team stats found for team: &#39;</span><span class="si">{</span><span class="n">team</span><span class="si">}</span><span class="s2">&#39; in group: &#39;</span><span class="si">{</span><span class="n">group_type</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+                <span class="k">continue</span>
+
+        <span class="k">return</span> <span class="n">all_group_stats</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_stat_leaders</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stat</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">group</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;hitting&quot;</span><span class="p">,</span> <span class="n">season</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2026</span><span class="p">,</span> <span class="n">num_leaders</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">league</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Fetch the top players in a specific stat category for the current season.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            stat: The stat category to fetch leaders for (e.g., &quot;homeRuns&quot;, &quot;strikeOuts&quot;).</span>
+<span class="sd">            group: The stat group to fetch from (&quot;hitting&quot; or &quot;pitching&quot;). Defaults to &quot;hitting&quot;.</span>
+<span class="sd">            season: The season year for which to fetch leaders. Defaults to 2026.</span>
+<span class="sd">            num_leaders: The maximum number of leaders to return. Defaults to 10.</span>
+<span class="sd">            league: The league for which to fetch leaders. Defaults to &quot;&quot; (all leagues).</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A list of dictionaries containing the top players and their stats in the specified category.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">endpoint</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">BASE_URL</span><span class="si">}</span><span class="s2">/stats/leaders&quot;</span>
+        <span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;statGroup&quot;</span><span class="p">:</span> <span class="n">group</span><span class="p">,</span>
+            <span class="s2">&quot;statType&quot;</span><span class="p">:</span> <span class="s2">&quot;season&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;season&quot;</span><span class="p">:</span> <span class="n">season</span><span class="p">,</span>
+            <span class="s2">&quot;limit&quot;</span><span class="p">:</span> <span class="n">num_leaders</span><span class="p">,</span>
+            <span class="s2">&quot;leaderCategories&quot;</span><span class="p">:</span> <span class="n">stat</span>
+        <span class="p">}</span>
+
+        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">endpoint</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
+        <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+
+        <span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">leaders</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;leagueLeaders&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;leaders&quot;</span><span class="p">]</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">league</span><span class="p">):</span>
+                <span class="n">leaders</span> <span class="o">=</span> <span class="p">[</span><span class="n">leader</span> <span class="k">for</span> <span class="n">leader</span> <span class="ow">in</span> <span class="n">leaders</span> <span class="k">if</span> <span class="n">leader</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;league&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="n">league</span><span class="o">.</span><span class="n">lower</span><span class="p">()]</span>
+            <span class="k">return</span> <span class="n">leaders</span>
+        <span class="k">except</span> <span class="p">(</span><span class="ne">IndexError</span><span class="p">,</span> <span class="ne">KeyError</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;No leaders found for stat: &#39;</span><span class="si">{</span><span class="n">stat</span><span class="si">}</span><span class="s2">&#39; in group: &#39;</span><span class="si">{</span><span class="n">group</span><span class="si">}</span><span class="s2">&#39; for season: </span><span class="si">{</span><span class="n">season</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="p">[]</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="mlb_stats.client.mlb_stats_client.convert_team_to_id" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">convert_team_to_id</span><span class="p">(</span><span class="n">team_identifier</span><span class="p">)</span></code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Helper to ensure we have an integer team ID.</p>
+
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Parameters:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+              <b><code>team_identifier</code></b>
+                  (<code><span title="typing.Union">Union</span>[<span title="str">str</span>, <span title="int">int</span>]</code>)
+              –
+              <div class="doc-md-description">
+                <p>The team's name or ID.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Returns:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+                  <code><span title="int">int</span></code>
+              –
+              <div class="doc-md-description">
+                <p>The MLB team_id of the team.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Raises:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+                  <code><span title="ValueError">ValueError</span></code>
+              –
+              <div class="doc-md-description">
+                <p>If no team is found with the given name.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>mlb_stats/client.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">convert_team_to_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">team_identifier</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Helper to ensure we have an integer team ID.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        team_identifier: The team&#39;s name or ID.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        The MLB team_id of the team.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If no team is found with the given name.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">team_identifier</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_team_id</span><span class="p">(</span><span class="n">team_identifier</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">team_identifier</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="mlb_stats.client.mlb_stats_client.convert_to_id" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">convert_to_id</span><span class="p">(</span><span class="n">player_identifier</span><span class="p">)</span></code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Helper to ensure we have an integer ID, looking up names if needed.</p>
+
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Parameters:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+              <b><code>player_identifier</code></b>
+                  (<code><span title="typing.Union">Union</span>[<span title="str">str</span>, <span title="int">int</span>]</code>)
+              –
+              <div class="doc-md-description">
+                <p>The player's name or ID.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Returns:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+                  <code><span title="int">int</span></code>
+              –
+              <div class="doc-md-description">
+                <p>The MLB person_id of the player.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Raises:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+                  <code><span title="ValueError">ValueError</span></code>
+              –
+              <div class="doc-md-description">
+                <p>If no player is found with the given name.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>mlb_stats/client.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">convert_to_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">player_identifier</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Helper to ensure we have an integer ID, looking up names if needed.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        player_identifier: The player&#39;s name or ID.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        The MLB person_id of the player.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If no player is found with the given name.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">player_identifier</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_player_id</span><span class="p">(</span><span class="n">player_identifier</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">player_identifier</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="mlb_stats.client.mlb_stats_client.get_hitter_stats" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">get_hitter_stats</span><span class="p">(</span><span class="n">player</span><span class="p">,</span> <span class="n">fields</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">stat_type</span><span class="o">=</span><span class="s1">&#39;season&#39;</span><span class="p">,</span> <span class="n">season</span><span class="o">=</span><span class="mi">2026</span><span class="p">)</span></code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Fetch current season hitting stats by player name or MLB ID.</p>
+
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Parameters:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+              <b><code>player</code></b>
+                  (<code><span title="typing.Union">Union</span>[<span title="str">str</span>, <span title="int">int</span>]</code>)
+              –
+              <div class="doc-md-description">
+                <p>The player's name or MLB ID.</p>
+              </div>
+            </li>
+            <li>
+              <b><code>fields</code></b>
+                  (<code><span title="list">list</span>[<span title="str">str</span>]</code>, default:
+                      <code>None</code>
+)
+              –
+              <div class="doc-md-description">
+                <p>Specific stat fields to return. Defaults to None (return all).</p>
+              </div>
+            </li>
+            <li>
+              <b><code>stat_type</code></b>
+                  (<code><span title="str">str</span></code>, default:
+                      <code>&#39;season&#39;</code>
+)
+              –
+              <div class="doc-md-description">
+                <p>Type of stats to fetch (e.g., "season", "career"). Defaults to "season".</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Returns:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+                  <code><span title="dict">dict</span></code>
+              –
+              <div class="doc-md-description">
+                <p>A dictionary containing the requested hitting stats.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Raises:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+                  <code><span title="ValueError">ValueError</span></code>
+              –
+              <div class="doc-md-description">
+                <p>If no player is found with the given name.</p>
+              </div>
+            </li>
+            <li>
+                  <code><span title="season">season</span></code>
+              –
+              <div class="doc-md-description">
+                <p>The season year for which to fetch stats. Defaults to 2026.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>mlb_stats/client.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_hitter_stats</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">player</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span> <span class="n">fields</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">stat_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;season&quot;</span><span class="p">,</span> <span class="n">season</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2026</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Fetch current season hitting stats by player name or MLB ID.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        player: The player&#39;s name or MLB ID.</span>
+<span class="sd">        fields: Specific stat fields to return. Defaults to None (return all).</span>
+<span class="sd">        stat_type: Type of stats to fetch (e.g., &quot;season&quot;, &quot;career&quot;). Defaults to &quot;season&quot;.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A dictionary containing the requested hitting stats.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If no player is found with the given name.</span>
+<span class="sd">        season: The season year for which to fetch stats. Defaults to 2026.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">person_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert_to_id</span><span class="p">(</span><span class="n">player</span><span class="p">)</span>
+    <span class="n">endpoint</span> <span class="o">=</span> <span class="n">endpoint</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">BASE_URL</span><span class="si">}</span><span class="s2">/people/</span><span class="si">{</span><span class="n">person_id</span><span class="si">}</span><span class="s2">?hydrate=stats(group=[hitting],type=[</span><span class="si">{</span><span class="n">stat_type</span><span class="si">}</span><span class="s2">],season=</span><span class="si">{</span><span class="n">season</span><span class="si">}</span><span class="s2">)&quot;</span>
+
+    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">endpoint</span><span class="p">)</span>
+    <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+
+    <span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">stats</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;people&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;stats&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;splits&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;stat&quot;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">fields</span><span class="p">:</span>
+            <span class="n">stats</span> <span class="o">=</span> <span class="p">{</span><span class="n">field</span><span class="p">:</span> <span class="n">stats</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">field</span><span class="p">)</span> <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">fields</span><span class="p">}</span>
+        <span class="k">return</span> <span class="n">stats</span>
+    <span class="k">except</span> <span class="p">(</span><span class="ne">IndexError</span><span class="p">,</span> <span class="ne">KeyError</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;No hitting stats found for player: &#39;</span><span class="si">{</span><span class="n">player</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">{}</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="mlb_stats.client.mlb_stats_client.get_pitcher_stats" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">get_pitcher_stats</span><span class="p">(</span><span class="n">player</span><span class="p">,</span> <span class="n">fields</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">stat_type</span><span class="o">=</span><span class="s1">&#39;season&#39;</span><span class="p">,</span> <span class="n">season</span><span class="o">=</span><span class="mi">2026</span><span class="p">)</span></code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Fetch current season pitching stats by player name or MLB ID.</p>
+
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Parameters:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+              <b><code>player</code></b>
+                  (<code><span title="typing.Union">Union</span>[<span title="str">str</span>, <span title="int">int</span>]</code>)
+              –
+              <div class="doc-md-description">
+                <p>The player's name or MLB ID.</p>
+              </div>
+            </li>
+            <li>
+              <b><code>fields</code></b>
+                  (<code><span title="list">list</span>[<span title="str">str</span>]</code>, default:
+                      <code>None</code>
+)
+              –
+              <div class="doc-md-description">
+                <p>Specific stat fields to return. Defaults to None (return all).</p>
+              </div>
+            </li>
+            <li>
+              <b><code>stat_type</code></b>
+                  (<code><span title="str">str</span></code>, default:
+                      <code>&#39;season&#39;</code>
+)
+              –
+              <div class="doc-md-description">
+                <p>Type of stats to fetch (e.g., "season", "career"). Defaults to "season".</p>
+              </div>
+            </li>
+            <li>
+              <b><code>season</code></b>
+                  (<code><span title="int">int</span></code>, default:
+                      <code>2026</code>
+)
+              –
+              <div class="doc-md-description">
+                <p>The season year for which to fetch stats. Defaults to 2026.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Returns:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+                  <code><span title="dict">dict</span></code>
+              –
+              <div class="doc-md-description">
+                <p>A dictionary containing the requested pitching stats.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Raises:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+                  <code><span title="ValueError">ValueError</span></code>
+              –
+              <div class="doc-md-description">
+                <p>If no player is found with the given name.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>mlb_stats/client.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span>
+<span class="normal">78</span>
+<span class="normal">79</span>
+<span class="normal">80</span>
+<span class="normal">81</span>
+<span class="normal">82</span>
+<span class="normal">83</span>
+<span class="normal">84</span>
+<span class="normal">85</span>
+<span class="normal">86</span>
+<span class="normal">87</span>
+<span class="normal">88</span>
+<span class="normal">89</span>
+<span class="normal">90</span>
+<span class="normal">91</span>
+<span class="normal">92</span>
+<span class="normal">93</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_pitcher_stats</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">player</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span> <span class="n">fields</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">stat_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;season&quot;</span><span class="p">,</span> <span class="n">season</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2026</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Fetch current season pitching stats by player name or MLB ID.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        player: The player&#39;s name or MLB ID.</span>
+<span class="sd">        fields: Specific stat fields to return. Defaults to None (return all).</span>
+<span class="sd">        stat_type: Type of stats to fetch (e.g., &quot;season&quot;, &quot;career&quot;). Defaults to &quot;season&quot;.</span>
+<span class="sd">        season: The season year for which to fetch stats. Defaults to 2026.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A dictionary containing the requested pitching stats.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If no player is found with the given name.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">person_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert_to_id</span><span class="p">(</span><span class="n">player</span><span class="p">)</span>
+    <span class="n">endpoint</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">BASE_URL</span><span class="si">}</span><span class="s2">/people/</span><span class="si">{</span><span class="n">person_id</span><span class="si">}</span><span class="s2">?hydrate=stats(group=[pitching],type=[</span><span class="si">{</span><span class="n">stat_type</span><span class="si">}</span><span class="s2">],season=</span><span class="si">{</span><span class="n">season</span><span class="si">}</span><span class="s2">)&quot;</span>
+
+    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">endpoint</span><span class="p">)</span>
+    <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+
+    <span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">stats</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;people&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;stats&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;splits&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;stat&quot;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">fields</span><span class="p">:</span>
+            <span class="n">stats</span> <span class="o">=</span> <span class="p">{</span><span class="n">field</span><span class="p">:</span> <span class="n">stats</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">field</span><span class="p">)</span> <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">fields</span><span class="p">}</span>
+        <span class="k">return</span> <span class="n">stats</span>
+    <span class="k">except</span> <span class="p">(</span><span class="ne">IndexError</span><span class="p">,</span> <span class="ne">KeyError</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;No pitching stats found for player: &#39;</span><span class="si">{</span><span class="n">player</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">{}</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="mlb_stats.client.mlb_stats_client.get_player_id" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">get_player_id</span><span class="p">(</span><span class="n">name</span><span class="p">)</span></code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Search for a player by full name and return their MLB person_id.</p>
+
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Parameters:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+              <b><code>name</code></b>
+                  (<code><span title="str">str</span></code>)
+              –
+              <div class="doc-md-description">
+                <p>The full name of the player to search for.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Returns:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+                  <code><span title="int">int</span></code>
+              –
+              <div class="doc-md-description">
+                <p>The MLB person_id of the player.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Raises:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+                  <code><span title="ValueError">ValueError</span></code>
+              –
+              <div class="doc-md-description">
+                <p>If no player is found with the given name.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>mlb_stats/client.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_player_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Search for a player by full name and return their MLB person_id.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        name: The full name of the player to search for.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        The MLB person_id of the player.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If no player is found with the given name.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">endpoint</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">BASE_URL</span><span class="si">}</span><span class="s2">/people/search?names=</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">endpoint</span><span class="p">)</span>
+    <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+
+    <span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+    <span class="n">people</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;people&quot;</span><span class="p">,</span> <span class="p">[])</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">people</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;No player found matching name: &#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">people</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;id&quot;</span><span class="p">]</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="mlb_stats.client.mlb_stats_client.get_stat_leaders" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">get_stat_leaders</span><span class="p">(</span><span class="n">stat</span><span class="p">,</span> <span class="n">group</span><span class="o">=</span><span class="s1">&#39;hitting&#39;</span><span class="p">,</span> <span class="n">season</span><span class="o">=</span><span class="mi">2026</span><span class="p">,</span> <span class="n">num_leaders</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">league</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span></code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Fetch the top players in a specific stat category for the current season.</p>
+
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Parameters:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+              <b><code>stat</code></b>
+                  (<code><span title="str">str</span></code>)
+              –
+              <div class="doc-md-description">
+                <p>The stat category to fetch leaders for (e.g., "homeRuns", "strikeOuts").</p>
+              </div>
+            </li>
+            <li>
+              <b><code>group</code></b>
+                  (<code><span title="str">str</span></code>, default:
+                      <code>&#39;hitting&#39;</code>
+)
+              –
+              <div class="doc-md-description">
+                <p>The stat group to fetch from ("hitting" or "pitching"). Defaults to "hitting".</p>
+              </div>
+            </li>
+            <li>
+              <b><code>season</code></b>
+                  (<code><span title="int">int</span></code>, default:
+                      <code>2026</code>
+)
+              –
+              <div class="doc-md-description">
+                <p>The season year for which to fetch leaders. Defaults to 2026.</p>
+              </div>
+            </li>
+            <li>
+              <b><code>num_leaders</code></b>
+                  (<code><span title="int">int</span></code>, default:
+                      <code>10</code>
+)
+              –
+              <div class="doc-md-description">
+                <p>The maximum number of leaders to return. Defaults to 10.</p>
+              </div>
+            </li>
+            <li>
+              <b><code>league</code></b>
+                  (<code><span title="str">str</span></code>, default:
+                      <code>&#39;&#39;</code>
+)
+              –
+              <div class="doc-md-description">
+                <p>The league for which to fetch leaders. Defaults to "" (all leagues).</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Returns:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+                  <code><span title="list">list</span>[<span title="dict">dict</span>]</code>
+              –
+              <div class="doc-md-description">
+                <p>A list of dictionaries containing the top players and their stats in the specified category.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>mlb_stats/client.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">194</span>
+<span class="normal">195</span>
+<span class="normal">196</span>
+<span class="normal">197</span>
+<span class="normal">198</span>
+<span class="normal">199</span>
+<span class="normal">200</span>
+<span class="normal">201</span>
+<span class="normal">202</span>
+<span class="normal">203</span>
+<span class="normal">204</span>
+<span class="normal">205</span>
+<span class="normal">206</span>
+<span class="normal">207</span>
+<span class="normal">208</span>
+<span class="normal">209</span>
+<span class="normal">210</span>
+<span class="normal">211</span>
+<span class="normal">212</span>
+<span class="normal">213</span>
+<span class="normal">214</span>
+<span class="normal">215</span>
+<span class="normal">216</span>
+<span class="normal">217</span>
+<span class="normal">218</span>
+<span class="normal">219</span>
+<span class="normal">220</span>
+<span class="normal">221</span>
+<span class="normal">222</span>
+<span class="normal">223</span>
+<span class="normal">224</span>
+<span class="normal">225</span>
+<span class="normal">226</span>
+<span class="normal">227</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_stat_leaders</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stat</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">group</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;hitting&quot;</span><span class="p">,</span> <span class="n">season</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2026</span><span class="p">,</span> <span class="n">num_leaders</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">league</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Fetch the top players in a specific stat category for the current season.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        stat: The stat category to fetch leaders for (e.g., &quot;homeRuns&quot;, &quot;strikeOuts&quot;).</span>
+<span class="sd">        group: The stat group to fetch from (&quot;hitting&quot; or &quot;pitching&quot;). Defaults to &quot;hitting&quot;.</span>
+<span class="sd">        season: The season year for which to fetch leaders. Defaults to 2026.</span>
+<span class="sd">        num_leaders: The maximum number of leaders to return. Defaults to 10.</span>
+<span class="sd">        league: The league for which to fetch leaders. Defaults to &quot;&quot; (all leagues).</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A list of dictionaries containing the top players and their stats in the specified category.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">endpoint</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">BASE_URL</span><span class="si">}</span><span class="s2">/stats/leaders&quot;</span>
+    <span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;statGroup&quot;</span><span class="p">:</span> <span class="n">group</span><span class="p">,</span>
+        <span class="s2">&quot;statType&quot;</span><span class="p">:</span> <span class="s2">&quot;season&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;season&quot;</span><span class="p">:</span> <span class="n">season</span><span class="p">,</span>
+        <span class="s2">&quot;limit&quot;</span><span class="p">:</span> <span class="n">num_leaders</span><span class="p">,</span>
+        <span class="s2">&quot;leaderCategories&quot;</span><span class="p">:</span> <span class="n">stat</span>
+    <span class="p">}</span>
+
+    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">endpoint</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
+    <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+
+    <span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">leaders</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;leagueLeaders&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;leaders&quot;</span><span class="p">]</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">league</span><span class="p">):</span>
+            <span class="n">leaders</span> <span class="o">=</span> <span class="p">[</span><span class="n">leader</span> <span class="k">for</span> <span class="n">leader</span> <span class="ow">in</span> <span class="n">leaders</span> <span class="k">if</span> <span class="n">leader</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;league&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="n">league</span><span class="o">.</span><span class="n">lower</span><span class="p">()]</span>
+        <span class="k">return</span> <span class="n">leaders</span>
+    <span class="k">except</span> <span class="p">(</span><span class="ne">IndexError</span><span class="p">,</span> <span class="ne">KeyError</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;No leaders found for stat: &#39;</span><span class="si">{</span><span class="n">stat</span><span class="si">}</span><span class="s2">&#39; in group: &#39;</span><span class="si">{</span><span class="n">group</span><span class="si">}</span><span class="s2">&#39; for season: </span><span class="si">{</span><span class="n">season</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">[]</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="mlb_stats.client.mlb_stats_client.get_team_id" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">get_team_id</span><span class="p">(</span><span class="n">name</span><span class="p">)</span></code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Search for a team by name (e.g., 'Yankees' or 'New York Yankees') and return its team_id.</p>
+
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Parameters:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+              <b><code>name</code></b>
+                  (<code><span title="str">str</span></code>)
+              –
+              <div class="doc-md-description">
+                <p>The name of the team to search for.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Returns:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+                  <code><span title="int">int</span></code>
+              –
+              <div class="doc-md-description">
+                <p>The MLB team_id of the team.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Raises:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+                  <code><span title="ValueError">ValueError</span></code>
+              –
+              <div class="doc-md-description">
+                <p>If no team is found with the given name.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>mlb_stats/client.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_team_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Search for a team by name (e.g., &#39;Yankees&#39; or &#39;New York Yankees&#39;) and return its team_id.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        name: The name of the team to search for.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        The MLB team_id of the team.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If no team is found with the given name.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">endpoint</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">BASE_URL</span><span class="si">}</span><span class="s2">/teams?sportId=1&quot;</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">endpoint</span><span class="p">)</span>
+    <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+
+    <span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+    <span class="n">teams</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;teams&quot;</span><span class="p">,</span> <span class="p">[])</span>
+    <span class="n">name_lower</span> <span class="o">=</span> <span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">team</span> <span class="ow">in</span> <span class="n">teams</span><span class="p">:</span>
+        <span class="n">team</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;springLeague&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">name_lower</span> <span class="o">==</span> <span class="n">team</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;clubName&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">or</span> 
+            <span class="n">name_lower</span> <span class="o">==</span> <span class="n">team</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">or</span>
+            <span class="n">name_lower</span> <span class="o">==</span> <span class="n">team</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;abbreviation&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()):</span>
+            <span class="k">return</span> <span class="n">team</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span>
+
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;No team found matching name: &#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="mlb_stats.client.mlb_stats_client.get_team_stats" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">get_team_stats</span><span class="p">(</span><span class="n">team</span><span class="p">,</span> <span class="n">fields</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">group</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;hitting&#39;</span><span class="p">,</span> <span class="s1">&#39;pitching&#39;</span><span class="p">])</span></code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Fetch current season team stats by team name or ID using the dedicated /teams/stats endpoint.</p>
+
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Parameters:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+              <b><code>team</code></b>
+                  (<code><span title="typing.Union">Union</span>[<span title="str">str</span>, <span title="int">int</span>]</code>)
+              –
+              <div class="doc-md-description">
+                <p>The team's name or MLB ID.</p>
+              </div>
+            </li>
+            <li>
+              <b><code>fields</code></b>
+                  (<code><span title="list">list</span>[<span title="str">str</span>]</code>, default:
+                      <code>None</code>
+)
+              –
+              <div class="doc-md-description">
+                <p>Specific stat fields to return. Defaults to None (return all).</p>
+              </div>
+            </li>
+            <li>
+              <b><code>group</code></b>
+                  (<code><span title="list">list</span>[<span title="str">str</span>]</code>, default:
+                      <code>[&#39;hitting&#39;, &#39;pitching&#39;]</code>
+)
+              –
+              <div class="doc-md-description">
+                <p>List of stat groups to fetch (e.g., ["hitting", "pitching"]). Defaults to both.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Returns:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+                  <code><span title="dict">dict</span></code>
+              –
+              <div class="doc-md-description">
+                <p>A dictionary containing the requested team stats, organized by group type.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Raises:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+                  <code><span title="ValueError">ValueError</span></code>
+              –
+              <div class="doc-md-description">
+                <p>If no team is found with the given name.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>mlb_stats/client.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span>
+<span class="normal">171</span>
+<span class="normal">172</span>
+<span class="normal">173</span>
+<span class="normal">174</span>
+<span class="normal">175</span>
+<span class="normal">176</span>
+<span class="normal">177</span>
+<span class="normal">178</span>
+<span class="normal">179</span>
+<span class="normal">180</span>
+<span class="normal">181</span>
+<span class="normal">182</span>
+<span class="normal">183</span>
+<span class="normal">184</span>
+<span class="normal">185</span>
+<span class="normal">186</span>
+<span class="normal">187</span>
+<span class="normal">188</span>
+<span class="normal">189</span>
+<span class="normal">190</span>
+<span class="normal">191</span>
+<span class="normal">192</span>
+<span class="normal">193</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_team_stats</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">team</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span> <span class="n">fields</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">group</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;hitting&quot;</span><span class="p">,</span> <span class="s2">&quot;pitching&quot;</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Fetch current season team stats by team name or ID using the dedicated /teams/stats endpoint.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        team: The team&#39;s name or MLB ID.</span>
+<span class="sd">        fields: Specific stat fields to return. Defaults to None (return all).</span>
+<span class="sd">        group: List of stat groups to fetch (e.g., [&quot;hitting&quot;, &quot;pitching&quot;]). Defaults to both.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A dictionary containing the requested team stats, organized by group type.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If no team is found with the given name.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">team_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert_team_to_id</span><span class="p">(</span><span class="n">team</span><span class="p">)</span>
+    <span class="n">all_group_stats</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">for</span> <span class="n">group_type</span> <span class="ow">in</span> <span class="n">group</span><span class="p">:</span>
+        <span class="n">endpoint</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">BASE_URL</span><span class="si">}</span><span class="s2">/teams/</span><span class="si">{</span><span class="n">team_id</span><span class="si">}</span><span class="s2">/stats&quot;</span>
+        <span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;teamId&quot;</span><span class="p">:</span> <span class="n">team_id</span><span class="p">,</span>
+            <span class="s2">&quot;stats&quot;</span><span class="p">:</span> <span class="s2">&quot;season&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;group&quot;</span><span class="p">:</span> <span class="n">group_type</span><span class="p">,</span> 
+            <span class="s2">&quot;season&quot;</span><span class="p">:</span> <span class="mi">2026</span>      
+        <span class="p">}</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">endpoint</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
+        <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+
+        <span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">stats</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;stats&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;splits&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;stat&quot;</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">fields</span><span class="p">:</span>
+                <span class="n">stats</span> <span class="o">=</span> <span class="p">{</span><span class="n">field</span><span class="p">:</span> <span class="n">stats</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">field</span><span class="p">)</span> <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">fields</span> <span class="k">if</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">stats</span><span class="p">}</span>
+            <span class="n">all_group_stats</span><span class="p">[</span><span class="n">group_type</span><span class="p">]</span> <span class="o">=</span> <span class="n">stats</span>
+        <span class="k">except</span> <span class="p">(</span><span class="ne">IndexError</span><span class="p">,</span> <span class="ne">KeyError</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;No team stats found for team: &#39;</span><span class="si">{</span><span class="n">team</span><span class="si">}</span><span class="s2">&#39; in group: &#39;</span><span class="si">{</span><span class="n">group_type</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+            <span class="k">continue</span>
+
+    <span class="k">return</span> <span class="n">all_group_stats</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+
+</div>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href=".." class="btn btn-neutral float-left" title="Home"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href=".." style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
