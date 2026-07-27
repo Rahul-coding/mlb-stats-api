@@ -54,4 +54,4 @@ print(client.get_team_stats("NYY", group = ["fielding"], fields = ["errors", "fi
 ```
 
 
-
+# [API Reference](https://rahul-coding.github.io/mlb-stats-api/)

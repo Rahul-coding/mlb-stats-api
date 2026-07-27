@@ -1,0 +1,19 @@
+site_name: MLB Stats Client
+site_description: A lightweight user friendly client for fetching MLB stats data directly from the MLB API.
+
+theme:
+  name: readthedocs
+  features:
+    - navigation.instant
+    - content.code.copy
+
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          paths: [.] # Tells it to look in the root directory for your package
+
+nav:
+  - Home: README.md
+  - API Reference: api-refernce.md

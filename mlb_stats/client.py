@@ -1,11 +1,22 @@
-import requests
+from __future__ import annotations
 from typing import Union
+import requests
 
 class mlb_stats_client:
     BASE_URL = "https://statsapi.mlb.com/api/v1"
 
     def get_player_id(self, name: str) -> int:
-        #earch for a player by full name and return their MLB person_id.
+        """Search for a player by full name and return their MLB person_id.
+
+        Args:
+            name: The full name of the player to search for.
+
+        Returns:
+            The MLB person_id of the player.
+
+        Raises:
+            ValueError: If no player is found with the given name.
+        """
         endpoint = f"{self.BASE_URL}/people/search?names={name}"
         response = requests.get(endpoint)
         response.raise_for_status()
@@ -19,22 +30,53 @@ class mlb_stats_client:
         return people[0]["id"]
 
     def convert_to_id(self, player_identifier: Union[str, int]) -> int:
-        #Helper to ensure we have an integer ID, looking up names if needed.
+        """Helper to ensure we have an integer ID, looking up names if needed.
+
+        Args:
+            player_identifier: The player's name or ID.
+
+        Returns:
+            The MLB person_id of the player.
+
+        Raises:
+            ValueError: If no player is found with the given name.
+        """
         if isinstance(player_identifier, str):
             return self.get_player_id(player_identifier)
         return player_identifier
 
     def convert_team_to_id(self, team_identifier: Union[str, int]) -> int:
-       #Helper to ensure we have an integer team ID
+        """Helper to ensure we have an integer team ID.
+
+        Args:
+            team_identifier: The team's name or ID.
+
+        Returns:
+            The MLB team_id of the team.
+
+        Raises:
+            ValueError: If no team is found with the given name.
+        """
         if isinstance(team_identifier, str):
             return self.get_team_id(team_identifier)
         return team_identifier
 
-    def get_pitcher_stats(self, player: Union[str, int], fields: list[str]):
-        #Fetch current season pitching stats by player name or MLB ID.
+    def get_pitcher_stats(self, player: Union[str, int], fields: list[str] = None, stat_type: str = "season") -> dict:
+        """Fetch current season pitching stats by player name or MLB ID.
 
+        Args:
+            player: The player's name or MLB ID.
+            fields: Specific stat fields to return. Defaults to None (return all).
+            stat_type: Type of stats to fetch (e.g., "season", "career"). Defaults to "season".
+
+        Returns:
+            A dictionary containing the requested pitching stats.
+
+        Raises:
+            ValueError: If no player is found with the given name.
+        """
         person_id = self.convert_to_id(player)
-        endpoint = f"{self.BASE_URL}/people/{person_id}?hydrate=stats(group=[pitching],type=[season])"
+        endpoint = f"{self.BASE_URL}/people/{person_id}?hydrate=stats(group=[pitching],type=[{stat_type}])"
         
         response = requests.get(endpoint)
         response.raise_for_status()
@@ -42,7 +84,6 @@ class mlb_stats_client:
         data = response.json()
         try:
             stats = data["people"][0]["stats"][0]["splits"][0]["stat"]
-            #check if specific fields were requested and filter the stats accordingly
             if fields:
                 stats = {field: stats.get(field) for field in fields}
             return stats
@@ -50,10 +91,22 @@ class mlb_stats_client:
             print(f"No pitching stats found for player: '{player}'")
             return {}
 
-    def get_hitter_stats(self, player: Union[str, int], fields: list[str] = None):
-       #Fetch current season hitting stats by player name or MLB ID.
+    def get_hitter_stats(self, player: Union[str, int], fields: list[str] = None, stat_type: str = "season") -> dict:
+        """Fetch current season hitting stats by player name or MLB ID.
+
+        Args:
+            player: The player's name or MLB ID.
+            fields: Specific stat fields to return. Defaults to None (return all).
+            stat_type: Type of stats to fetch (e.g., "season", "career"). Defaults to "season".
+
+        Returns:
+            A dictionary containing the requested hitting stats.
+
+        Raises:
+            ValueError: If no player is found with the given name.
+        """
         person_id = self.convert_to_id(player)
-        endpoint = f"{self.BASE_URL}/people/{person_id}?hydrate=stats(group=[hitting],type=[season])"
+        endpoint = f"{self.BASE_URL}/people/{person_id}?hydrate=stats(group=[hitting],type=[{stat_type}])"
         
         response = requests.get(endpoint)
         response.raise_for_status()
@@ -61,7 +114,6 @@ class mlb_stats_client:
         data = response.json()
         try:
             stats = data["people"][0]["stats"][0]["splits"][0]["stat"]
-            #check if specific fields were requested and filter the stats accordingly
             if fields:
                 stats = {field: stats.get(field) for field in fields}
             return stats
@@ -70,17 +122,26 @@ class mlb_stats_client:
             return {}
         
     def get_team_id(self, name: str) -> int:
-        #Search for a team by name (e.g., 'Yankees' or 'New York Yankees') and return its team_id.
+        """Search for a team by name (e.g., 'Yankees' or 'New York Yankees') and return its team_id.
+
+        Args:
+            name: The name of the team to search for.
+
+        Returns:
+            The MLB team_id of the team.
+
+        Raises:
+            ValueError: If no team is found with the given name.
+        """
         endpoint = f"{self.BASE_URL}/teams?sportId=1"
         response = requests.get(endpoint)
         response.raise_for_status()
         
         data = response.json()
         teams = data.get("teams", [])
-        # Search match against team name, location, or short name case-insensitively
         name_lower = name.lower()
         for team in teams:
-            team.pop("springLeague", None)  # Remove springLeague if present
+            team.pop("springLeague", None)
             if (name_lower == team.get("clubName", "").lower() or 
                 name_lower == team.get("name", "").lower() or
                 name_lower == team.get("abbreviation", "").lower()):
@@ -88,18 +149,28 @@ class mlb_stats_client:
                 
         raise ValueError(f"No team found matching name: '{name}'")
             
-    def get_team_stats(self, team: Union[str, int], fields: list[str] = None, group: list[str] = ["hitting", "pitching"], stat_type: str = "season"):
-        # Fetch current season team stats by team name or ID using the dedicated /teams/stats endpoint.
+    def get_team_stats(self, team: Union[str, int], fields: list[str] = None, group: list[str] = ["hitting", "pitching"]) -> dict:
+        """Fetch current season team stats by team name or ID using the dedicated /teams/stats endpoint.
+
+        Args:
+            team: The team's name or MLB ID.
+            fields: Specific stat fields to return. Defaults to None (return all).
+            group: List of stat groups to fetch (e.g., ["hitting", "pitching"]). Defaults to both.
+
+        Returns:
+            A dictionary containing the requested team stats, organized by group type.
+
+        Raises:
+            ValueError: If no team is found with the given name.
+        """
         team_id = self.convert_team_to_id(team)
-        
         all_group_stats = {}
         
-        # Use the dedicated /teams/stats endpoint with parameters for group and stat type
         for group_type in group:
             endpoint = f"{self.BASE_URL}/teams/{team_id}/stats"
             params = {
                 "teamId": team_id,
-                "stats": stat_type,
+                "stats": "season",
                 "group": group_type, 
                 "season": 2026      
             }
@@ -110,16 +181,11 @@ class mlb_stats_client:
 
             try:
                 stats = data["stats"][0]["splits"][0]["stat"]
-                
-                # Filter fields if specified
                 if fields:
                     stats = {field: stats.get(field) for field in fields if field in stats}
-                    
-                # Store stats under their respective group type
                 all_group_stats[group_type] = stats
-                
             except (IndexError, KeyError):
                 print(f"No team stats found for team: '{team}' in group: '{group_type}'")
-                continue #countinue to next group if one fails
+                continue
                 
         return all_group_stats
