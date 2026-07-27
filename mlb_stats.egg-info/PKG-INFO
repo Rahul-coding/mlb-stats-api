@@ -1,0 +1,16 @@
+Metadata-Version: 2.4
+Name: mlb-stats
+Version: 0.1.0
+Summary: A lightweight Python wrapper for MLB stats.
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+Requires-Dist: requests>=2.28.0
+
+# mlb-stats
+
+A lightweight Python library for accessing MLB statistics.
+
+## Local Installation
+
+```bash
+pip install -e .
