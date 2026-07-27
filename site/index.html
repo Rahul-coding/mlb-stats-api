@@ -76,13 +76,16 @@
             <div class="section" itemprop="articleBody">
               
                 <h1 id="mlb-stats-client">MLB stats client</h1>
-<p>A lightweight user friendly client for fetching MLB stats data directly from the MLB API</p>
+<p>A lightweight user friendly client for fetching MLB stats data directly from the MLB API. Requries python version 3.x</p>
 <h2 id="table-of-contents">Table of Contents</h2>
 <ol>
 <li><a href="#features">Features</a></li>
 <li><a href="#installation">Installation</a></li>
-<li><a href="#quick-start--methods">Quick Start</a></li>
+<li><a href="#quick-start">Quick Start</a></li>
 <li><a href="#get-pitcher-stats">get-pitcher-stats</a></li>
+<li><a href="#get-hitter-stats">get-hitter-stats</a></li>
+<li><a href="#get-team-stats">get-team-stats</a></li>
+<li><a href="#api-reference">API Reference</a></li>
 </ol>
 <h1 id="features">features</h1>
 <ul>
@@ -95,9 +98,27 @@
 <p>Make sure you have the <code>requests</code> library installed:</p>
 <pre><code class="language-bash">pip install requests
 </code></pre>
-<p>Save the <code>mlb_stats_client</code> class into your project (e.g., mlb_client.py). This is not yet released to <code>pip</code>.</p>
-<h1 id="quick-start-methods">Quick Start &amp; Methods</h1>
-<h2 id="get-pitcher-stats">get-pitcher-stats</h2>
+<p>Save the <code>mlb_stats_client</code> class into your project (e.g., mlb_stats.py). This is not yet released to <code>pip</code>.</p>
+<h1 id="quick-start">Quick Start</h1>
+<h2 id="get-hitter-stats">get-hitter-stats()</h2>
+<pre><code>from mlb_stats import mlb_stats_client
+
+client = mlb_stats_client()
+print(client.get_hitter_stats(&quot;Mike Trout&quot;, stat_type=&quot;career&quot;, fields = [&quot;avg&quot;, &quot;homeRuns&quot;])) #pull Mike Trout's carrer batting average and home runs
+</code></pre>
+<h2 id="get-pitcher-stats">get-pitcher-stats()</h2>
+<pre><code>from mlb_stats import mlb_stats_client #import the library
+
+client = mlb_stats_client() #set up the client
+print(client.get_pitcher_stats(&quot;Jacob deGrom&quot;, stat_type=&quot;sabermetrics&quot;, fields = [&quot;xfip&quot;, &quot;war&quot;])) #pull xfip and war from advanced metrics for Jacob DeGrom
+</code></pre>
+<h2 id="get-team-stats">get-team-stats()</h2>
+<pre><code>from mlb_stats import mlb_stats_client
+
+client = mlb_stats_client()
+print(client.get_team_stats(&quot;NYY&quot;, group = [&quot;fielding&quot;], fields = [&quot;errors&quot;, &quot;fielding&quot;])) #get the Yankees errors and fielding% this year
+</code></pre>
+<h1 id="api-reference"><a href="https://rahul-coding.github.io/mlb-stats-api/api-refernce/">API Reference</a></h1>
               
             </div>
           </div><footer>
@@ -146,5 +167,5 @@
 
 <!--
 MkDocs version : 1.6.1
-Build Date UTC : 2026-07-27 17:58:08.739870+00:00
+Build Date UTC : 2026-07-27 18:04:19.474271+00:00
 -->

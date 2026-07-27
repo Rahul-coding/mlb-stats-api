@@ -26,7 +26,6 @@ Save the `mlb_stats_client` class into your project (e.g., mlb_stats.py). This i
 # Quick Start
 
 ## get-hitter-stats()
-[View API Reference](#api-reference-get-hitter-stats)
 ```
 from mlb_stats import mlb_stats_client
 
@@ -35,7 +34,6 @@ print(client.get_hitter_stats("Mike Trout", stat_type="career", fields = ["avg",
 ```
 
 ## get-pitcher-stats()
-[View API Reference](#api-reference-get-pitcher-stats)
 ```
 from mlb_stats import mlb_stats_client #import the library
 
@@ -44,8 +42,6 @@ print(client.get_pitcher_stats("Jacob deGrom", stat_type="sabermetrics", fields 
 ```
 
 ## get-team-stats()
-[View API Reference](#api-reference-get-team-stats)
-
 ```
 from mlb_stats import mlb_stats_client
 
@@ -54,4 +50,4 @@ print(client.get_team_stats("NYY", group = ["fielding"], fields = ["errors", "fi
 ```
 
 
-# [API Reference](https://rahul-coding.github.io/mlb-stats-api/)
+# [API Reference](https://rahul-coding.github.io/mlb-stats-api/api-refernce/)
