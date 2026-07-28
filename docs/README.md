@@ -5,10 +5,10 @@ A lightweight user friendly client for fetching MLB stats data directly from the
 1. [Features](#features)
 2. [Installation](#installation)
 3. [Quick Start](#quick-start)
-   * [get-hitter-stats](#get-hitter-stats)
-   * [get-pitcher-stats](#get-pitcher-stats)
-   * [get-stat-leaders](#get-stat-leaders)
-   * [get-team-stats](#get-team-stats)
+   * [get_hitter_stats](#get_hitter_stats)
+   * [get_pitcher_stats](#get_pitcher_stats)
+   * [get_stat_leaders](#get_stat_leaders)
+   * [get_team_stats](#get_team_stats)
    
 5. [API Reference](#api-reference)
 6. [Valid Parameter options](#valid-parameter-options)
@@ -28,7 +28,7 @@ Save the `mlb_stats_client` class into your project (e.g., mlb_stats.py). This i
 
 # Quick Start
 
-## get-hitter-stats()
+## get_hitter_stats()
 ```
 from mlb_stats import mlb_stats_client
 
@@ -36,7 +36,7 @@ client = mlb_stats_client()
 print(client.get_hitter_stats("Mike Trout", stat_type="career", fields = ["avg", "homeRuns"])) #pull Mike Trout's carrer batting average and home runs
 ```
 
-## get-pitcher-stats()
+## get_pitcher_stats()
 ```
 from mlb_stats import mlb_stats_client #import the library
 
@@ -68,21 +68,24 @@ print(client.get_team_stats("NYY", group = ["fielding"], fields = ["errors", "fi
 # Valid Parameter Options
 What inputs you can use for the different parameters such as fields, group, etc
 
-## get-hitter-stats()
+## get_hitter_stats()
 
 **Params** 
 1. **player** (Union[str, int]) -- Required 
     * the `player` parameter can take in either a **players full name** (eg., `Shohei Ohtani`) OR the **players id** (eg., `660271`).  
-3. **fields** (list[str]) -- default `None` (all fields will be returned)
-> Note arguments in the "advanced" category are only valid with the `sabermetrics` argument for `stat_type`
+2. **fields** (list[str]) -- default `None` (all fields will be returned)
+> Note arguments in the "advanced" category are only valid with the `sabermetrics` argument for `stat_type`. The `season` argument is only available with the `yearByYeaar` `stat_type` argument
 
 | Category    | Options  |
 | --------    | -------- | 
-| Basic/counts| gamesPlayed, plateAppearances, atBats, runs, hits, doubles, triples, homeRuns, totalBases, rbi, baseOnBalls, intentionalWalks, hitByPitch, strikeOuts, leftOnBase, numberOfPitches, age| 
+| Basic/counts| gamesPlayed, plateAppearances, atBats, runs, hits, doubles, triples, homeRuns, totalBases, rbi, baseOnBalls, intentionalWalks, hitByPitch, strikeOuts, leftOnBase, numberOfPitches, age, season| 
 | Slashes     | avg, obp, slg, ops, babip, atBatsPerHomeRun|
 | Baserunning | stolenBases, caughtStealing, stolenBasePercentage, caughtStealingPercentage|
 | Batted Ball | groundOuts, airOuts, groundOutsToAirouts, groundIntoDoublePlay, sacBunts, sacFlies, catchersInterference|
 | Advanced    | woba, wRaa, wRc, wRcPlus, far, war, batting, fielding, baseRunning, positional, wLeague, replacement, spd, ubr, wGdp, wSb|
-
+3. **stat_type** (str) -- default season
+    * can be set to `season`, `career`, `sabmetrics`, `yearByYear`
+4. **season**
+    * can be set to any season of the players career. This argument only works with the `season` or `sabermetrics` `stat_type` arguement. It will be ignored otherwise
 
 
